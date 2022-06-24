@@ -9,7 +9,7 @@
 SPEC_FILE="urbandictionary-api.yaml"
 CONFIG_FILE="python.json"
 
-cp "../../${urbandictionary-api.yaml}" "./${urbandictionary-api.yaml}"
+cp "../../${SPEC_FILE}" "./${SPEC_FILE}"
 
 docker run --rm -it -v ${PWD}:/local swaggerapi/swagger-codegen-cli generate \
   -i /local/${SPEC_FILE} \
