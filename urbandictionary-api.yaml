@@ -1,0 +1,115 @@
+openapi: 3.0.3
+info:
+  title: Urban Dictionary API
+  description: Urban Dictionary API
+  version: 0.1.0
+servers:
+  - url: 'https://api.urbandictionary.com/v0/'
+paths:
+  /define:
+    get:
+      description: "Returns a list of the urban definitions for a given term."
+      operationId: defineTerm
+      parameters:
+        - name: term
+          in: query
+          description: "The term to get a definition for."
+          required: false
+          schema:
+            type: string
+        - name: defid
+          in: query
+          description: "The ID of the term definition."
+          required: false
+          schema:
+            type: integer
+      responses:
+        200:
+          description: "Definitions for the term."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Definitions"
+
+  /random:
+    get:
+      description: "Returns a random list of urban definitions."
+      operationId: randomTerms
+      responses:
+        200:
+          description: "Random urban definitions."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Definitions"
+  /words_of_the_day:
+    get:
+      description: "Returns a list of urban definitions of the day."
+      operationId: wordsOfTheDay
+      responses:
+        200:
+          description: "Words of the day definitions."
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Definitions"
+
+components:
+  schemas:
+    Definitions:
+      description: "An array of urban term definitions."
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: "#/components/schemas/TermDefinition"
+      required:
+        - list
+    TermDefinition:
+      description: "Represents a definition of the term."
+      type: object
+      properties:
+        word:
+          type: string
+          description: "The term this definition is define for."
+        definition:
+          type: string
+          description: "The definition of the term."
+        permalink:
+          type: string
+          format: uri
+          description: "A link to the permanent page with the term."
+        thumbs_up:
+          type: integer
+          description: "The number of up vote's for a term definition."
+        thumbs_down:
+          type: integer
+          description: "The number of down vote's for a term definition."
+        current_vote:
+          type: string
+          description: "???"
+        sound_urls:
+          type: array
+          items:
+            type: string
+            format: uri
+        author:
+          type: string
+          description: "The name of the term author"
+        defid:
+          type: integer
+          description: "The ID of the definition"
+        written_on:
+          type: string
+          format: date-time
+          description: "The time when the term was defined."
+        example:
+          type: string
+          description: "An example of the term usage."
+      required:
+        - word
+        - definition
+        - author
+        - example
+        - written_on
