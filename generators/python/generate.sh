@@ -10,9 +10,7 @@ SPEC_FILE="urbandictionary-api.yaml"
 CONFIG_FILE="python.json"
 
 cp "../../${SPEC_FILE}" "./${SPEC_FILE}"
+mkdir -p sdk
 
-docker run --rm -it -v ${PWD}:/local swaggerapi/swagger-codegen-cli generate \
-  -i /local/${SPEC_FILE} \
-  -l python \
-  -o /local/sdk \
-  -c /local/"${CONFIG_FILE}"
+GENERATOR_CMD="generate -i /local/${SPEC_FILE} -g python-experimental -o /local/sdk -c /local/${CONFIG_FILE}"
+docker run --rm -it -v ${PWD}:/local openapitools/openapi-generator-cli ${GENERATOR_CMD}
