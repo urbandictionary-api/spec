@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.1.0
 info:
   title: Urban Dictionary API
   description: Urban Dictionary API
-  version: 0.1.0
+  version: 0.2.0
 servers:
   - url: 'https://api.urbandictionary.com/v0/'
 paths:
@@ -58,54 +58,68 @@ components:
   schemas:
     Definitions:
       description: "An array of urban term definitions."
-      type: object
+      type:
+        - object
       properties:
         list:
-          type: array
+          type:
+            - array
           items:
             $ref: "#/components/schemas/TermDefinition"
       required:
         - list
     TermDefinition:
       description: "Represents a definition of the term."
-      type: object
+      type:
+        - object
       properties:
         word:
-          type: string
+          type:
+            - string
           description: "The term this definition is define for."
         definition:
-          type: string
+          type:
+            - string
           description: "The definition of the term."
         permalink:
-          type: string
+          type:
+            - string
           format: uri
           description: "A link to the permanent page with the term."
         thumbs_up:
-          type: integer
+          type:
+            - integer
           description: "The number of up vote's for a term definition."
         thumbs_down:
-          type: integer
+          type:
+            - integer
           description: "The number of down vote's for a term definition."
         current_vote:
-          type: string
+          type:
+            - string
           description: "???"
         sound_urls:
-          type: array
+          type:
+            - array
           items:
             type: string
             format: uri
         author:
-          type: string
+          type:
+            - string
           description: "The name of the term author"
         defid:
-          type: integer
+          type:
+            - integer
           description: "The ID of the definition"
         written_on:
-          type: string
+          type:
+            - string
           format: date-time
           description: "The time when the term was defined."
         example:
-          type: string
+          type:
+            - string
           description: "An example of the term usage."
       required:
         - word
